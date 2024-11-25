@@ -18,7 +18,7 @@ defineProps<{
 
 <style lang="scss">
 .button {
-    background: $primaryColor;
+    background: orange;
     color: $white;
     padding: rem(16px) rem(32px);
     border-radius: rem(48px);
@@ -27,7 +27,7 @@ defineProps<{
     cursor: pointer;
 
     &:hover {
-        background: $primaryDarkColor;
+        background: darkgoldenrod;
     }
 
     &.-outline {
