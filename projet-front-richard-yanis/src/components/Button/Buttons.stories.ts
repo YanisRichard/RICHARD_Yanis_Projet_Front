@@ -10,8 +10,8 @@ const meta: Meta<typeof Button> = {
       options: ['primary', 'outline', 'disabled'],
     },
     disabled: {
-      control: {type: 'boolean'}
-    }
+      control: { type: 'boolean' },
+    },
   },
 }
 
@@ -28,7 +28,7 @@ export const Primary: Story = {
     template: `<Button v-bind="args">${args.default}</Button>`,
   }),
   args: {
-    default: "MonBoutonVivant",
+    default: 'MonBoutonVivant',
   },
 }
 
@@ -41,8 +41,8 @@ export const Outline: Story = {
     template: `<Button v-bind="args">${args.default}</Button>`,
   }),
   args: {
-    default: "MonBoutonVide",
-    variant: "outline"
+    default: 'MonBoutonVide',
+    variant: 'outline',
   },
 }
 
@@ -55,8 +55,8 @@ export const PrimaryDisabled: Story = {
     template: `<Button v-bind="args">${args.default}</Button>`,
   }),
   args: {
-    default: "MonBoutonMortVivant",
-    variant: "primary",
-    disabled: true
+    default: 'MonBoutonMortVivant',
+    variant: 'primary',
+    disabled: true,
   },
 }
