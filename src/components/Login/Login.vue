@@ -28,7 +28,7 @@ export default defineComponent({
       if (validate()) {
         try {
           await props.onLogin(email.value, password.value);
-        } catch (err) {
+        } catch {
           errors.value.general = 'Connexion échouée. Veuillez vérifier vos identifiants.';
         }
       }
