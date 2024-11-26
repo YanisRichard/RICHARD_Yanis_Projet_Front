@@ -19,9 +19,7 @@ export default {
     <h1 class="header__title">{{ title }}</h1>
     <nav v-if="navigation && navigation.length" class="header__nav">
       <ul>
-        <li v-for="(item, index) in navigation" :key="index">
-          <a :href="item.link">{{ item.label }}</a>
-        </li>
+        <li v-for="(item, index) in navigation" :key="index"></li>
       </ul>
     </nav>
   </header>
