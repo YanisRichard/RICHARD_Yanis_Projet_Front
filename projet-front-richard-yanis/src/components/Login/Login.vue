@@ -41,29 +41,31 @@ export default defineComponent({
 
 <template>
   <div class="login">
-    <h2>Connexion</h2>
+    <h2 class="login__h2">Connexion</h2>
     <form @submit.prevent="handleSubmit">
-      <div>
-        <label for="email">Email :</label>
+      <div class="login__divLabel">
+        <label class="login__label" for="email">Email :</label> <br>
         <input
           id="email"
           type="email"
+          class="login__input"
           v-model="email"
           placeholder="Entrez votre email"
         />
         <p v-if="errors.email" class="error">{{ errors.email }}</p>
       </div>
-      <div>
-        <label for="password">Mot de passe :</label>
+      <div class="login__divLabel">
+        <label class="login__label" for="password">Mot de passe :</label> <br>
         <input
           id="password"
           type="password"
+          class="login__input"
           v-model="password"
           placeholder="Entrez votre mot de passe"
         />
         <p v-if="errors.password" class="error">{{ errors.password }}</p>
       </div>
-      <button type="submit">Se connecter</button>
+      <button class="login__button" type="submit">Se connecter</button>
       <p v-if="errors.general" class="error">{{ errors.general }}</p>
     </form>
   </div>
@@ -71,6 +73,44 @@ export default defineComponent({
 
 
 <style scoped>
+
+.login {
+  border: 1px;
+  border-radius: 20px;
+  background-color: rgb(158, 134, 196);
+  max-width: fit-content;
+  display: grid;
+  padding: 20px;
+
+}
+
+.login__h2 {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+}
+
+.login__label {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.login__divLabel {
+  padding-bottom: 10px;
+}
+
+.login__input {
+  border-radius: 5px;
+}
+
+.login__button {
+  background: gray;
+  color: white;
+  padding: 16px 32px;
+  border-radius: 8px;
+  border: 1px solid gray;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 .error {
   color: red;
   font-size: 0.875rem;
