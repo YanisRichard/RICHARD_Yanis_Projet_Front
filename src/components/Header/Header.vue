@@ -39,7 +39,7 @@ export default {
 .header__title {
   font-family:Arial, Helvetica, sans-serif;
   font-size: 1.5rem;
-  color: #333;
+  color: rgb(210, 114, 212);
 
 }
 
