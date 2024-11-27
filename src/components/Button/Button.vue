@@ -18,16 +18,16 @@ defineProps<{
 
 <style lang="scss">
 .button {
-    background: orange;
+    background: linear-gradient(to right, rgb(185, 101, 187), blue);
     color: $white;
     padding: rem(16px) rem(32px);
     border-radius: rem(48px);
-    border: 1px solid $primaryColor;
+    border: 1px solid transparent;
     text-decoration: none;
     cursor: pointer;
 
     &:hover {
-        background: darkgoldenrod;
+        background: linear-gradient(to right, rgb(112, 60, 113), rgb(7, 7, 155));
     }
 
     &.-outline {

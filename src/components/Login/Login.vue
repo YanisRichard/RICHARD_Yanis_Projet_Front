@@ -77,20 +77,21 @@ export default defineComponent({
 .login {
   border: 1px;
   border-radius: 20px;
-  background-color: rgb(158, 134, 196);
-  max-width: fit-content;
-  display: grid;
+  background: linear-gradient(to bottom right, rgb(185, 101, 187), blue);
+  max-width: 500px;
   padding: 20px;
 
 }
 
 .login__h2 {
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: #fff;
 }
 
 .login__label {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #fff;
+
 }
 
 .login__divLabel {
@@ -102,10 +103,9 @@ export default defineComponent({
 }
 
 .login__button {
-  background: gray;
-  color: white;
+  background: #F5F5F5;
+  color: blue;
   padding: 16px 32px;
-  border-radius: 8px;
   border: 1px solid gray;
   text-decoration: none;
   cursor: pointer;
