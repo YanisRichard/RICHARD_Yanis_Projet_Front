@@ -99,5 +99,9 @@ const parfumsFiltered = computed(() => parfums.filter((parfum) => {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     }
+
+    h2 {
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
 }
 </style>

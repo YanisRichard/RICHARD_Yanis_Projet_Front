@@ -52,6 +52,7 @@ defineProps<{
     }
 
     &__title {
+        font-family: Georgia, 'Times New Roman', Times, serif;
         font-size: rem(24px);
         color: $gray800;
     }
