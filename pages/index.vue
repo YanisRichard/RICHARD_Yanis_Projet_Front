@@ -5,6 +5,7 @@
 <template>
     <div>
         page d'Accueil
+        <Button>Bonjour</Button>
     </div>
 </template>
 
