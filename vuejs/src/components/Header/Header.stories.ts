@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from '@storybook/vue3';
 
-import Header from './Header.vue';
+import Header from '@/components/Header/Header.vue';
 
 export default {
   title: 'Components/Header',
