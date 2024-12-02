@@ -1,6 +1,6 @@
 <script lang="ts">
 export default {
-  name: 'Header_',
+  name: 'Header2',
   props: {
     title: {
       type: String,

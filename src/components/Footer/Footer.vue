@@ -1,6 +1,6 @@
 <script lang="ts">
 export default {
-  name: "Footer_",
+  name: "Footer1",
   data() {
     return {
       currentYear: new Date().getFullYear(),
