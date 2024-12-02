@@ -17,10 +17,10 @@ export default {
 <template>
   <header class="header">
     <h1 class="header__title">Habits.com</h1>
-    <nav v-if="navigation && navigation.length" class="header__nav">
+    <nav class="header__nav">
       <ul>
         <li>Accueil</li>
-        <li>Calendrier</li>
+        <li><a href="/blog">Blog</a></li>
         <li>Compte</li>
       </ul>
     </nav>
@@ -75,6 +75,7 @@ export default {
             text-decoration: underline;
             }
             li {
+              display: flex;
               background: #007bff
             }
           }
