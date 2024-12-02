@@ -47,22 +47,22 @@ export default defineComponent({
         <label class="login__label" for="email">Email :</label> <br>
         <input
           id="email"
+          v-model="email"
           type="email"
           class="login__input"
-          v-model="email"
           placeholder="Entrez votre email"
-        />
+        >
         <p v-if="errors.email" class="error">{{ errors.email }}</p>
       </div>
       <div class="login__divLabel">
         <label class="login__label" for="password">Mot de passe :</label> <br>
         <input
           id="password"
+          v-model="password"
           type="password"
           class="login__input"
-          v-model="password"
           placeholder="Entrez votre mot de passe"
-        />
+        >
         <p v-if="errors.password" class="error">{{ errors.password }}</p>
       </div>
       <button class="login__button" type="submit">Se connecter</button>
