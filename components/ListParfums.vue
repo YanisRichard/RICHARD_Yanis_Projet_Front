@@ -1,7 +1,5 @@
 <script lang="ts" setup>
-import MyItem from "@/components/Item.vue";
-import { reactive, computed } from "vue";
- 
+import MyItem from "@/components/Item.vue"; 
 
 const filterValue = defineModel('filter');
 

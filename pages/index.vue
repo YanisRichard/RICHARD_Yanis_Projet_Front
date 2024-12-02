@@ -6,6 +6,7 @@
     <div>
         page d'Accueil
         <Button>Bonjour</Button>
+        <ListParfums />
     </div>
 </template>
 
