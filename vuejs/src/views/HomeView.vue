@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import MyHeader from '@/components/Header/Header.vue'
+import MyHeader from '../../../.nuxt/components/Header.vue'
 import MyLogin from '@/components/Login/Login.vue'
 import MyFooter from '@/components/Footer/Footer.vue'
 
