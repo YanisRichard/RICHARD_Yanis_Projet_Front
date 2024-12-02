@@ -80,7 +80,6 @@ export default defineComponent({
   background: linear-gradient(to bottom right, rgb(185, 101, 187), blue);
   max-width: 500px;
   padding: 20px;
-
 }
 
 .login__h2 {
@@ -103,10 +102,11 @@ export default defineComponent({
 }
 
 .login__button {
-  background: #F5F5F5;
+  background: #fff;
   color: blue;
   padding: 16px 32px;
   border: 1px solid gray;
+  border-radius: 48px;
   text-decoration: none;
   cursor: pointer;
 }

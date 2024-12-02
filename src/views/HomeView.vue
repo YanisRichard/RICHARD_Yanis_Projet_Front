@@ -1,10 +1,15 @@
 <script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
+import MyHeader from '@/components/Header/Header.vue'
+import MyButton from '@/components/Button/Button.vue'
+import MyLogin from '@/components/Login/Login.vue'
+import MyFooter from '@/components/Footer/Footer.vue'
 
 </script>
 
 <template>
-  <main>
-    <TheWelcome />
-  </main>
+  <DefaultLayout>
+    <MyHeader />
+    <MyLogin />
+    <MyFooter />
+  </DefaultLayout>
 </template>
