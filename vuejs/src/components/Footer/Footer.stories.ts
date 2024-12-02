@@ -5,7 +5,7 @@ export default {
   component: Footer,
 };
 
-const Template = (args, { argTypes }) => ({
+const Template = (args) => ({
   components: { Footer },
   setup() {
     return { args };
@@ -14,4 +14,3 @@ const Template = (args, { argTypes }) => ({
 });
 
 export const Default = Template.bind({});
-Default.args = {};
