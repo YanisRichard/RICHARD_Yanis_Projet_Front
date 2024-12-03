@@ -8,7 +8,7 @@ export default defineNuxtConfig({
     {path: '~/components/', pathPrefix: false}
   ],
   sanity: {
-    projectId: "d5b7ce2c-25da-4286-9b1c-3166880f682b",
+    projectId: "xgw9in35",
     dataset: "production",
   },
   vite:{
