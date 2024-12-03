@@ -19,7 +19,7 @@ export default {
     <h1 class="header__title">Habits.com</h1>
     <nav class="header__nav">
       <ul>
-        <li>Accueil</li>
+        <li><a href="/">Accueil</a></li>
         <li><a href="/blog">Blog</a></li>
         <li>Compte</li>
       </ul>

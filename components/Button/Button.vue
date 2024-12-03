@@ -26,6 +26,7 @@ defineProps<{
     border: 1px solid transparent;
     text-decoration: none;
     cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;
 
     &:hover {
         background: linear-gradient(to right, rgb(112, 60, 113), rgb(7, 7, 155));
