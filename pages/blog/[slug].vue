@@ -7,6 +7,10 @@ const route = useRoute();
 const { data: post, error } = useSanityQuery<SanityDocument>(POST_QUERY, {
   slug: route.params.slug,
 });
+
+if (!post.value) {
+    throw createError({ statusCode: 404, statusMessage: 'Le post est introuvable'})
+}
 console.log(error);
 
 console.log(post);

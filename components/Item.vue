@@ -4,8 +4,8 @@ defineProps<{
     description: string;
     price: number;
     image: {
-        url: string;
-        src: string; 
+        src: string;
+        alt: string; 
     }
 }>();
 
@@ -13,7 +13,7 @@ defineProps<{
 
 <template>
     <div class="c-item">
-        <img class="c-item__image -blue" :src="image.url" >
+        <img class="c-item__image -blue" :src="image.src" >
         <p class="c-item__title">
             {{ name }}
         </p>

@@ -1,7 +1,5 @@
 <script lang="ts" setup>
-import MyItem from "@/components/Item.vue"; 
-
-const filterValue = defineModel('filter');
+const filterValue = defineModel<string>('filter');
 
 type Parfum = {
   id: number;
@@ -9,7 +7,7 @@ type Parfum = {
   description: string;
   price: number;
   image: {
-    url: string;
+    src: string;
     alt: string;
   }
 }
@@ -21,7 +19,7 @@ const parfums:Parfum[] = reactive([
     description: "Un parfum classique, intemporel, avec des notes florales de rose, de jasmin et de vanille.",
     price: 130,
     image: {
-      url: "https://placehold.co/600x400",
+      src: "https://placehold.co/600x400",
       alt: "Flacon de parfum Chanel No. 5"
     }
   },
@@ -31,7 +29,7 @@ const parfums:Parfum[] = reactive([
     description: "Un parfum frais et épicé avec des notes de bergamote, poivre et ambroxan.",
     price: 95,
     image: {
-      url: "https://placehold.co/600x400",
+      src: "https://placehold.co/600x400",
       alt: "Flacon de parfum Dior Sauvage"
     }
   },
@@ -41,7 +39,7 @@ const parfums:Parfum[] = reactive([
     description: "Un parfum oriental et floral, riche en orchidée noire, épices et bois précieux.",
     price: 180,
     image: {
-      url: "https://placehold.co/600x400",
+      src: "https://placehold.co/600x400",
       alt: "Flacon de parfum Tom Ford Black Orchid"
     }
   },
@@ -51,7 +49,7 @@ const parfums:Parfum[] = reactive([
     description: "Un parfum audacieux alliant la lavande et la fleur d'oranger, avec des touches de musc et de vanille.",
     price: 110,
     image: {
-      url: "https://placehold.co/600x400",
+      src: "https://placehold.co/600x400",
       alt: "Flacon de parfum Yves Saint Laurent Libre"
     }
   },
@@ -61,14 +59,14 @@ const parfums:Parfum[] = reactive([
     description: "Un parfum boisée et épicée, avec des notes de citron, poivre, cèdre et vétiver.",
     price: 140,
     image: {
-      url: "https://placehold.co/600x400",
+      src: "https://placehold.co/600x400",
       alt: "Flacon de parfum Hermès Terre d'Hermès"
     }
   }
 ]);
 
 const parfumsFiltered = computed(() => parfums.filter((parfum) => {
-    return parfum.name.includes(filterValue.value ?? "") 
+    return filterValue.value && parfum.name.includes(filterValue.value) 
 }))
 
 </script>
