@@ -4,16 +4,17 @@ import type { SanityDocument } from "@sanity/client";
 const POST_QUERY = groq`*[_type == "post" && slug.current == $slug][0]`;
 const route = useRoute();
 
-const { data: post, error } = useSanityQuery<SanityDocument>(POST_QUERY, {
+const { data: post, error } = await useSanityQuery<SanityDocument>(POST_QUERY, {
   slug: route.params.slug,
 });
+
+console.log(error);
+
+console.log(post);
 
 if (!post.value) {
     throw createError({ statusCode: 404, statusMessage: 'Le post est introuvable'})
 }
-console.log(error);
-
-console.log(post);
 </script>
 
 <template>

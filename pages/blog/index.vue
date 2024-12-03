@@ -6,7 +6,7 @@ import imageUrlBuilder from "@sanity/image-url";
 const POSTS_QUERY = groq`*[
   _type == "post"
   && defined(slug.current)
-]|order(publishedAt desc)[0...12]{_id, title, image, slug, publishedAt}`;
+]|order(publishedAt desc)[0...12]{_id, title, image, "categories": categories[]->{_id, title, slug}, slug, publishedAt}`;
 
 const { data: posts } = await useSanityQuery<SanityDocument[]>(POSTS_QUERY);
 
