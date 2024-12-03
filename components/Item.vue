@@ -13,7 +13,7 @@ defineProps<{
 
 <template>
     <div class="c-item">
-        <img class="c-item__image -blue" :src="image.url" :alt="image.alt" >
+        <img class="c-item__image -blue" :src="image.url" >
         <p class="c-item__title">
             {{ name }}
         </p>
