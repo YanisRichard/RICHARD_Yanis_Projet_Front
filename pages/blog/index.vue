@@ -3,21 +3,20 @@ import type { SanityDocument } from "@sanity/client";
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import imageUrlBuilder from "@sanity/image-url";
 
-const POSTS_QUERY = groq`*[
-  _type == "post"
-  && defined(slug.current)
-]|order(publishedAt desc)[0...12]{_id, title, image, "categories": categories[]->{_id, title, slug}, slug, publishedAt}`;
+const filter = ref('nature')
 
-const CATEGORIES_QUERY = groq`*[
+const {data: categories} = await useSanityQuery<SanityDocument[]>(groq`*[
   _type == "category"
   && defined(slug.current)
-]`;
+]`)
 
-const filter = ref('')
+const {data: posts} = await useSanityQuery<SanityDocument[]>(groq`*[
+  _type == "post"
+  && defined(slug.current)
+  && $filter in (categories[]->slug.current)
+]|order(publishedAt desc)[0...12]{_id, title, image, "categories": categories[]->{_id, title, slug},
+ slug, publishedAt}`, {filter: filter.value} ) 
 
-const { data: posts } = await useSanityQuery<SanityDocument[]>(POSTS_QUERY);
-
-const { data: categories } = await useSanityQuery<SanityDocument[]>(CATEGORIES_QUERY);
 
 function onCategoryClick (category:SanityDocument) {
   filter.value = category.slug.current
@@ -36,8 +35,10 @@ const urlFor = (source: SanityImageSource) =>
       <h1>Les articles</h1>
       <!--Liste de boutons  -->
       <div class="p-blog__categories">
-        filter : {{filter }}
-        <div v-for="(category, index) in categories" :key="index" class="p-blog__category" @click="onCategoryClick(category)">
+        <div v-for="(category, index) in categories" :key="index" :class="[
+          'p-blog__category',
+        {'-is-active': filter === category.slug.current}
+        ]" @click="onCategoryClick(category)">
           <button class="category__button"> 
             {{ category.title }}
           </button>
