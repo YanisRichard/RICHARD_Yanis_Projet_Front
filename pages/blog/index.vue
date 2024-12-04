@@ -3,41 +3,59 @@ import type { SanityDocument } from "@sanity/client";
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import imageUrlBuilder from "@sanity/image-url";
 
-const filter = ref('')
+const filter = ref("");
 
-const page = ref(1)
-const perPage = 2
+const page = ref(1);
+const perPage = 2;
 
-const paginationStart = computed(() =>{
-  return (page.value - 1) * perPage
-})
+const paginationStart = computed(() => {
+  return (page.value - 1) * perPage;
+});
 
-const paginationEnd = computed(() =>{
-  return page.value * perPage
-})
+const paginationEnd = computed(() => {
+  return page.value * perPage;
+});
 
-
-const {data: categories} = await useSanityQuery<SanityDocument[]>(groq`*[
+const { data: categories } = await useSanityQuery<SanityDocument[]>(groq`*[
   _type == "category"
   && defined(slug.current)
-]`)
+]`);
 
-const {data: posts} = await useSanityQuery<SanityDocument[]>(groq`*[
+const { data: posts } = await useSanityQuery<SanityDocument[]>(
+  groq`*[
   _type == "post"
   && defined(slug.current)
-  && ($filter =='' ||$filter in (categories[]->slug.current))
-  ]|order(publishedAt desc)[$start...$end]{_id, title, image, "categories": categories[]->{_id, title, slug},
-  slug, publishedAt}`, {filter: filter, start: paginationStart, end: paginationEnd});  
+  && ($filter =='' ||$filter in (categories[]->slug.current))]
+  |order(publishedAt desc)[$start...$end]{_id, title, image, "categories": categories[]->{_id, title, slug},
+  slug, publishedAt}`,
+  { filter: filter, start: paginationStart, end: paginationEnd }
+);
 
+const { data: totalPosts } = await useSanityQuery<number>(
+  groq`count(*[
+  _type == "post"
+  && defined(slug.current)
+  && ($filter =='' || $filter in (categories[]->slug.current))
+])`,
+  { filter: filter }
+);
 
-function onCategoryClick (category:SanityDocument) {
+const totalPages = computed(() => {
+  if (!totalPosts.value) return 0;
+  return Math.ceil(totalPosts.value / perPage);
+});
+
+function onCategoryClick(category: SanityDocument) {
+page.value = 1
+if (filter.value === category.slug.current) {
+  filter.value = ''
+ } else {
   filter.value = category.slug.current
+ }
 }
 
-
-
-function onPageClick (index: number) {
-  page.value = index
+function onPageClick(index: number) {
+  page.value = index;
 }
 
 const { projectId, dataset } = useSanity().client.config();
@@ -49,17 +67,24 @@ const urlFor = (source: SanityImageSource) =>
 
 <template>
   <main>
-    <div>
-      <h1>Les articles</h1>
-      <!--Liste de boutons  -->
-      <div class="p-blog__categories">
-        <div v-for="(category, index) in categories" :key="index" :class="[
-          'p-blog__category',
-        {'-is-active': filter === category.slug.current}
-        ]" @click="onCategoryClick(category)">
-          <button class="category__button"> 
-            {{ category.title }}
-          </button>
+    <div class="p-blog">
+      <h1>Les articles: il y en a {{ totalPosts }}</h1>
+      <div v-if="posts && posts.length" class="p-blog__list">
+        <!--Liste de boutons  -->
+        <div class="p-blog__categories">
+          <div
+            v-for="(category, index) in categories"
+            :key="index"
+            :class="[
+              'p-blog__category',
+              { '-is-active': filter === category.slug.current },
+            ]"
+            @click="onCategoryClick(category)"
+          >
+            <button class="category__button">
+              {{ category.title }}
+            </button>
+          </div>
         </div>
       </div>
       <ul>
@@ -68,21 +93,30 @@ const urlFor = (source: SanityImageSource) =>
             <p>{{ post.title }}</p>
           </NuxtLink>
           <div class="p-blog__item-categories">
-            <div v-for="(category, index) in post.categories" :key="index" class="p-blog__item">
+            <div
+              v-for="(category, index) in post.categories"
+              :key="index"
+              class="p-blog__item"
+            >
               {{ category.title }}
             </div>
           </div>
-          <img v-if="post.image && urlFor(post.image)"  
-          class="p-blog__item-image"  :src="urlFor(post.image)?.url()" 
-          alt="Alt"> <!-- Ne pas oublier le v-if, pour prendre en compte les cas où les articles ont des images --> 
+          <img v-if="post.image && urlFor(post.image)" class="p-blog__item-image" :src="urlFor(post.image)?.url()" alt="Alt">
+          <!-- Ne pas oublier le v-if, pour prendre en compte les cas où les articles ont des images -->
         </li>
       </ul>
       <br>
       On affiche la page {{ page }}
       <div class="p-blog__pagination">
-        <div v-for="n in 2" :key="n" class="p-blog__page" @click="onPageClick(n)">Page {{ n }}</div>
+        <div
+          v-for="totalPages in 3"
+          :key="totalPages"
+          class="p-blog__page"
+          @click="onPageClick(totalPages)"
+        >
+          Page {{ totalPages }}
+        </div>
       </div>
-
     </div>
   </main>
 </template>
@@ -161,7 +195,7 @@ li.p-blog {
   }
 
   .p-blog__item-image {
-    width:auto;
+    width: auto;
     height: 200px;
     object-fit: cover;
     border-bottom: 2px solid #f0f0f0;
