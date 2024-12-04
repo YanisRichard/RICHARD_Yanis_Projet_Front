@@ -68,7 +68,7 @@ const urlFor = (source: SanityImageSource) =>
       <br>
       On affiche la page {{ page }}
       <div class="p-blog__pagination">
-        <div v-for="n in 5" :key="n" class="p-blog__page" @click="onPageClick(n)">Page {{ n }}</div>
+        <div v-for="n in 2" :key="n" class="p-blog__page" @click="onPageClick(n)">Page {{ n }}</div>
       </div>
 
     </div>
