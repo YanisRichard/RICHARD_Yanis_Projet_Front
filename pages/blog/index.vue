@@ -3,7 +3,7 @@ import type { SanityDocument } from "@sanity/client";
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import imageUrlBuilder from "@sanity/image-url";
 
-const filter = ref('nature')
+const filter = ref('')
 
 const {data: categories} = await useSanityQuery<SanityDocument[]>(groq`*[
   _type == "category"
@@ -13,9 +13,9 @@ const {data: categories} = await useSanityQuery<SanityDocument[]>(groq`*[
 const {data: posts} = await useSanityQuery<SanityDocument[]>(groq`*[
   _type == "post"
   && defined(slug.current)
-  && $filter in (categories[]->slug.current)
-]|order(publishedAt desc)[0...12]{_id, title, image, "categories": categories[]->{_id, title, slug},
- slug, publishedAt}`, {filter: filter.value} ) 
+  && ($filter =='' ||$filter in (categories[]->slug.current))
+  ]|order(publishedAt desc)[0...12]{_id, title, image, "categories": categories[]->{_id, title, slug},
+  slug, publishedAt}`, {filter});  
 
 
 function onCategoryClick (category:SanityDocument) {
