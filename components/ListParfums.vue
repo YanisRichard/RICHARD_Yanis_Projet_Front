@@ -79,7 +79,7 @@ const parfumsFiltered = computed(() => parfums.filter((parfum) => {
             <input v-model="filterValue" type="text" placeholder="Rechercher un parfum">
         </div>
         <div class="c-parfum__list">
-            <MyItem v-for="({ ...parfum }) in parfumsFiltered" :key="parfum.id" v-bind="parfum"/>
+            <Item v-for="({ ...parfum }) in parfumsFiltered" :key="parfum.id" v-bind="parfum"/>
 
         </div>
     </div>
