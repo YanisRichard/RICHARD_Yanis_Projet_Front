@@ -1,4 +1,10 @@
 <script lang="ts" setup="">
+useSeoMeta({
+  title: 'Habits.com',
+  ogTitle: 'Habits',
+  description: 'Bienvenue sur Habits.com !',
+  ogDescription: 'Vous êtes sur mon site :p', 
+})
 
 </script>
 
