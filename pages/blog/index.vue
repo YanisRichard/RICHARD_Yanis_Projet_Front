@@ -14,12 +14,18 @@ const {data: posts} = await useSanityQuery<SanityDocument[]>(groq`*[
   _type == "post"
   && defined(slug.current)
   && ($filter =='' ||$filter in (categories[]->slug.current))
-  ]|order(publishedAt desc)[0...12]{_id, title, image, "categories": categories[]->{_id, title, slug},
-  slug, publishedAt}`, {filter});  
+  ]|order(publishedAt desc)[0...2]{_id, title, image, "categories": categories[]->{_id, title, slug},
+  slug, publishedAt}`, {filter: filter});  
 
 
 function onCategoryClick (category:SanityDocument) {
   filter.value = category.slug.current
+}
+
+const page = ref(1)
+
+function onPageClick (index: number) {
+  page.value = index
 }
 
 const { projectId, dataset } = useSanity().client.config();
@@ -44,8 +50,6 @@ const urlFor = (source: SanityImageSource) =>
           </button>
         </div>
       </div>
-
-      
       <ul>
         <li v-for="(post, index) in posts" :key="index" class="p-blog">
           <NuxtLink :to="`/blog/${post.slug.current}`">
@@ -61,6 +65,12 @@ const urlFor = (source: SanityImageSource) =>
           alt="Alt"> <!-- Ne pas oublier le v-if, pour prendre en compte les cas où les articles ont des images --> 
         </li>
       </ul>
+      <br>
+      On affiche la page {{ page }}
+      <div class="p-blog__pagination">
+        <div v-for="n in 5" :key="n" class="p-blog__page" @click="onPageClick(n)">Page {{ n }}</div>
+      </div>
+
     </div>
   </main>
 </template>
