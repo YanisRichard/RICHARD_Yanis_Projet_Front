@@ -5,6 +5,18 @@ import imageUrlBuilder from "@sanity/image-url";
 
 const filter = ref('')
 
+const page = ref(1)
+const perPage = 2
+
+const paginationStart = computed(() =>{
+  return (page.value - 1) * perPage
+})
+
+const paginationEnd = computed(() =>{
+  return page.value * perPage
+})
+
+
 const {data: categories} = await useSanityQuery<SanityDocument[]>(groq`*[
   _type == "category"
   && defined(slug.current)
@@ -14,17 +26,15 @@ const {data: posts} = await useSanityQuery<SanityDocument[]>(groq`*[
   _type == "post"
   && defined(slug.current)
   && ($filter =='' ||$filter in (categories[]->slug.current))
-  ]|order(publishedAt desc)[0...2]{_id, title, image, "categories": categories[]->{_id, title, slug},
-  slug, publishedAt}`, {filter: filter});  
-
-  //order(publishedAt desc)[2...4]{_id, title, image, "categories": categories[]->{_id, title, slug}, slug, publishedAt}, {}
+  ]|order(publishedAt desc)[$start...$end]{_id, title, image, "categories": categories[]->{_id, title, slug},
+  slug, publishedAt}`, {filter: filter, start: paginationStart, end: paginationEnd});  
 
 
 function onCategoryClick (category:SanityDocument) {
   filter.value = category.slug.current
 }
 
-const page = ref(1)
+
 
 function onPageClick (index: number) {
   page.value = index
@@ -136,6 +146,11 @@ li.p-blog {
   a {
     text-decoration: none;
     color: #333;
+  }
+
+  .category__button {
+    border: #0056b3;
+    font-family: Arial, Helvetica, sans-serif;
   }
 
   p {
