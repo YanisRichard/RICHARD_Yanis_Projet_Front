@@ -15,7 +15,7 @@ if (!post.value) {
 const { urlFor } = useSanityImage()
 
 useSeoMeta({
-  title: '${post.value.title} | Tracking App',
+  title: 'post.value.seo.title ? ${post.value.seo.title}  | ${post.value.title} | Tracking App',
   description: 'Retrouvez nos dernières informations et notre actualité sur Habits.com !',
   ogTitle: post.value.title,
   ogDescription: 'Ce site est un site informatif', 

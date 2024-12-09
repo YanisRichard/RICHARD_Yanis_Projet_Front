@@ -8,6 +8,7 @@ useSeoMeta({
   ogDescription: 'Ce site est un site informatif', 
 })
 
+
 const filter = ref("");
 
 const page = ref(1);
@@ -32,7 +33,7 @@ const { data: posts } = await useSanityQuery<SanityDocument[]>(
   && defined(slug.current)
   && ($filter =='' ||$filter in (categories[]->slug.current))]
   |order(publishedAt desc)[$start...$end]{_id, title, image, "categories": categories[]->{_id, title, slug},
-  slug, publishedAt}`,
+  slug, publishedAt}`,  
   { filter: filter, start: paginationStart, end: paginationEnd }
 );
 
