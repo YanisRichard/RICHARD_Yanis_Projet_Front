@@ -39,7 +39,7 @@ export default {
       }
 
       // Exemple de simulation de connexion
-      if (this.username === "admin" && this.password === "1234") {
+      if (this.username === "Yanis" && this.password === "1234") {
         alert("Connexion réussie!");
         this.errorMessage = "";
       } else {
@@ -54,10 +54,11 @@ export default {
 .login-container {
   max-width: 400px;
   margin: 0 auto;
+  margin-top: 2%;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  background-color: #ff5722;
+  background-color: #ccc;
   text-align: center;
 }
 
@@ -65,16 +66,22 @@ export default {
   margin-bottom: 15px;
 }
 
+h1 {
+    color: #ff5722;
+}
+
 label {
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 input {
   width: 70%;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #ff5722;
   border-radius: 4px;
   font-size: 14px;
 }
@@ -83,17 +90,19 @@ input {
   color: red;
   margin-bottom: 15px;
   font-size: 14px;
+  font-family:monospace;
 }
 
 .login-button {
   width: 100%;
   padding: 10px;
-  background-color: #007bff;
+  background-color: #ff5722;
   border: none;
   border-radius: 4px;
   color: white;
   font-size: 16px;
   cursor: pointer;
+  font-family:Verdana, Geneva, Tahoma, sans-serif
 }
 
 .login-button:hover {
