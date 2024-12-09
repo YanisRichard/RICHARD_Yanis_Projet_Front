@@ -17,8 +17,6 @@ useSeoMeta({
       <div v-if="Homepage" class="p-homepage">
         <Hero v-bind="{...Homepage.hero}" />
       </div>
-    
-
     </div>
      
 </template>

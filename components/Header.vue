@@ -20,7 +20,7 @@ export default {
     <nav class="header__nav">
       <a href="/">Accueil</a>
       <a href="/blog">Blog</a>
-      <a href="/compte">Compte</a>
+      <a href="/login">Compte</a>
     </nav>
   </header>
 </template>
@@ -37,7 +37,7 @@ export default {
   &__title {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1.5rem;
-    color: rgb(210, 114, 212);
+    color: #ff5722;
   }
 
   &__nav {
@@ -47,7 +47,7 @@ export default {
     a {
       font-family: Verdana, Geneva, Tahoma, sans-serif;
       text-decoration: none;
-      color: rgb(210, 114, 212); /* Couleur des liens */
+      color: #ff5722; /* Couleur des liens */
       font-size: 1rem;
 
       &:hover {
