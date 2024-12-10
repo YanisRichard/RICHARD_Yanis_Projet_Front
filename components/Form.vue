@@ -1,7 +1,5 @@
 <script lang="ts" setup="">
 
-const props = defineProps<{ action: 'login'|'register'}>()
-
 const username = ref('')
 
 const password = ref('')
@@ -13,11 +11,9 @@ const error = ref<string|null>(null)
 async function onSubmit(event: Event) {
     event.preventDefault()
 
-    //Envoyer une equête POST sur l'API par la route auth/register avec le username & le password
-    //Vérifier qu'on récupère bien un token JWT comme réponse
-    //Vérifier que notre nouvel utilisateur a bien été créé
-    try {
-        const response = await fetch('http://localhost:4000/auth/register', {
+
+    try {            
+        const response = await fetch('http://localhost:4000/auth/login', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -57,7 +53,7 @@ async function onSubmit(event: Event) {
         <input v-model="password" type="password" id="password" />
       </div>
       <div>
-        <button type="submit">S'inscrire</button>
+        <button type="submit">Se connecter</button>
       </div>
     </form>
   </div>
