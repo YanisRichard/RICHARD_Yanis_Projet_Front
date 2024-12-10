@@ -46,7 +46,6 @@ async function onSubmit(event: Event) {
 
 <template>
   <div>
-    <h1>Page d'inscription</h1>
     username: {{ username }} password: {{ password }}
     <form @submit="onSubmit">
       <div>
