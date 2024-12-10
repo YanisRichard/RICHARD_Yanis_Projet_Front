@@ -20,7 +20,7 @@ export default {
     <nav class="header__nav">
       <a href="/">Accueil</a>
       <a href="/blog">Blog</a>
-      <a href="/login">Compte</a>
+      <a href="/register">Compte</a>
     </nav>
   </header>
 </template>

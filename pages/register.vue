@@ -1,11 +1,12 @@
 <script lang="ts" setup="">
 
+
 </script>
 
 <template>
     <div>
-        <h1>Page de connexion</h1>
-        <Form v-bind="{action:'login'}" />
+        <h1>S'inscrire</h1>
+        <Form v-bind="{ action:'register'}" />
     </div>
 </template>
 
