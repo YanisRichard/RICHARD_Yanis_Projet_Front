@@ -18,11 +18,10 @@ export default {
   <header class="header">
     <h1 class="header__title">Habits.com</h1>
     <nav class="header__nav">
-      <ul>
-        <li><a href="/">Accueil</a></li>
-        <li><a href="/blog">Blog</a></li>
-        <li>Compte</li>
-      </ul>
+      <a href="/">Accueil</a>
+      <a href="/blog">Blog</a>
+      <a href="/login">Se Connecter</a>
+      <a href="/register">S'Inscrire</a>
     </nav>
   </header>
 </template>
@@ -34,52 +33,26 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 1rem;
 
   &__title {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1.5rem;
-    color: rgb(210, 114, 212);
+    color: #ff5722;
+  }
 
-    &__nav {
-      ul {
-        list-style: none;
-        display: flex;
-        gap: 1rem;
-        padding: 0;
-        margin: 0;
-        position: relative;
-        background: linear-gradient(to right, rgb(185, 101, 187), blue);
-        height: 100px;
-        width: 650px;
-        align-items: center;
-        justify-content: flex-end;
-        padding-right: 40px;
-        gap: 10%;
+  &__nav {
+    display: flex; /* Utiliser flexbox pour une ligne horizontale */
+    gap: 2rem; /* Espacement entre les liens */
+    
+    a {
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      text-decoration: none;
+      color: #ff5722; /* Couleur des liens */
+      font-size: 1rem;
 
-        ul:before {
-          position: absolute;
-          content: "";
-          width: 0;
-          height: 0;
-          left: 0px;
-          border-style: solid;
-          border-width: 100px 0 0 30px;
-          border-color: transparent transparent transparent #f5f5f5;
-
-          a {
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
-            text-decoration: none;
-            color: #007bff;
-
-            a:hover {
-            text-decoration: underline;
-            }
-            li {
-              display: flex;
-              background: #007bff
-            }
-          }
-        }
+      &:hover {
+        text-decoration: underline; /* Effet au survol */
       }
     }
   }

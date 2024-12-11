@@ -1,7 +1,13 @@
 <script setup lang="ts">
 import type { SanityDocument } from "@sanity/client";
-import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
-import imageUrlBuilder from "@sanity/image-url";
+
+useSeoMeta({
+  title: 'Blog - Habits.com',
+  ogTitle: 'Blog',
+  description: 'Retrouvez nos dernières informations et notre actualité sur Habits.com !',
+  ogDescription: 'Ce site est un site informatif', 
+})
+
 
 const filter = ref("");
 
@@ -27,7 +33,7 @@ const { data: posts } = await useSanityQuery<SanityDocument[]>(
   && defined(slug.current)
   && ($filter =='' ||$filter in (categories[]->slug.current))]
   |order(publishedAt desc)[$start...$end]{_id, title, image, "categories": categories[]->{_id, title, slug},
-  slug, publishedAt}`,
+  slug, publishedAt}`,  
   { filter: filter, start: paginationStart, end: paginationEnd }
 );
 
@@ -58,11 +64,8 @@ function onPageClick(index: number) {
   page.value = index;
 }
 
-const { projectId, dataset } = useSanity().client.config();
-const urlFor = (source: SanityImageSource) =>
-  projectId && dataset
-    ? imageUrlBuilder({ projectId, dataset }).image(source)
-    : null;
+const { urlFor } = useSanityImage()  
+
 </script>
 
 <template>

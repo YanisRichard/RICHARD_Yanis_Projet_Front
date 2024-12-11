@@ -74,7 +74,7 @@ const parfumsFiltered = computed(() => parfums.filter((parfum) => {
 
 <template>
     <div class="c-parfum">
-        <h2>Nos Parfums</h2>
+        <h3>Nos Parfums</h3>
         <div class="c-parfum__input">
             <input v-model="filterValue" type="text" placeholder="Rechercher un parfum">
         </div>
@@ -100,6 +100,10 @@ const parfumsFiltered = computed(() => parfums.filter((parfum) => {
 
     h2 {
       font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+
+    h3 {
+      margin: 2%;
     }
 }
 </style>
