@@ -35,6 +35,7 @@ async function onSubmit(event: Event) {
 
          } catch (err) {
             error.value = 'Mon message d\'erreur'
+            console.log(err)
         }
 }
 
