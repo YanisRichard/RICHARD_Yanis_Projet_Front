@@ -10,4 +10,9 @@
 </template>
 
 <style lang="scss">
+h1 {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    color: brown;
+}
 </style>
