@@ -25,5 +25,6 @@ export default async function (endpoint: string, {method, body, auth = true }: {
 
   } catch (err) {
       return null
+      console.log(err)
   }
 }
