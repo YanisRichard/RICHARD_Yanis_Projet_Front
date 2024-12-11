@@ -1,10 +1,9 @@
 <script lang="ts" setup="">
 import type { Habit } from "~/@types/habits";
+import type { DashboardPayload } from "~/@types/dashboard";
 
-const { data, refresh } = await useAsyncData<{
-  globalHabits: Habit[];
-  personalHabits: Habit[];
-}>("dashboard", async () => {
+
+const { data, refresh } = await useAsyncData<DashboardPayload>('dashboard', async () => {
   const response = await fetch("http://localhost:4000/dashboard", {
     method: "GET",
     headers: {
@@ -54,7 +53,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="dashboard">
+  <div v-if="data" class="dashboard">
     <h1 class="dashboard__title">Mon dashboard</h1>
     <h2 class="dashboard__subtitle">Habitudes globales</h2>
     <ul>
