@@ -1,5 +1,10 @@
 <script lang="ts" setup="">
-const { data, refresh } = await useAsyncData("dashboard", async () => {
+import type { Habit } from "~/@types/habits";
+
+const { data, refresh } = await useAsyncData<{
+  globalHabits: Habit[];
+  personalHabits: Habit[];
+}>("dashboard", async () => {
   const response = await fetch("http://localhost:4000/dashboard", {
     method: "GET",
     headers: {
@@ -9,7 +14,7 @@ const { data, refresh } = await useAsyncData("dashboard", async () => {
   return await response.json();
 });
 
-async function deleteHabit(habit, type: "global" | "personal") {
+async function deleteHabit(habit: Habit, type: "global" | "personal") {
   try {
     const response = await fetch(`http://localhost:4000/habits/${habit.id}`, {
       method: "DELETE",
@@ -21,11 +26,11 @@ async function deleteHabit(habit, type: "global" | "personal") {
 
     if (response.ok) {
       // Mise à jour locale sans refetch complet
-      if (type === "global") {
+      if (type === "global" && data.value) {
         data.value.globalHabits = data.value.globalHabits.filter(
           (h) => h.id !== habit.id
         );
-      } else {
+      } else if (data.value) {
         data.value.personalHabits = data.value.personalHabits.filter(
           (h) => h.id !== habit.id
         );
@@ -42,38 +47,42 @@ function onHabitCreated() {
   console.log("Une nouvelle habitude a été créée");
   refresh();
 }
+
+onMounted(() => {
+  $on("habit:created", onHabitCreated);
+});
 </script>
 
 <template>
-  <div>
-    <h1 class="c-h1__dashboard">Mon dashboard</h1>
-    <h2 class="c-h2__dashboard">Habitudes globales</h2>
+  <div class="dashboard">
+    <h1 class="dashboard__title">Mon dashboard</h1>
+    <h2 class="dashboard__subtitle">Habitudes globales</h2>
     <ul>
       <li
         v-for="(habit, index) in data.globalHabits"
         :key="index"
-        class= "c-li__dashboard"
-      > <!-- propriété de la classe : flex justify-between items-center-->
+        class="dashboard__list-element"
+      >
         {{ habit.title }} : {{ habit.description }}
         <button
-          class="c-button__dashboard"
-          @click="deleteHabit(habit, 'global')"          
-        > <!-- propriété de la clase: text-red-500 hover:text-red-700 -->
+          class="dashboard__button"
+          @click="deleteHabit(habit, 'global')"
+        >
           ✖️
         </button>
       </li>
     </ul>
 
-    <h2 class="c-h2__dashboard">Habitudes quotidiennes</h2>
+    <h2 class="dashboard__subtitle">Habitudes quotidiennes</h2>
     <ul>
       <li
         v-for="(habit, index) in data.personalHabits"
         :key="index"
-        class="c-li__dashboard"
+        class="dashboard__list-element"
       >
         {{ habit.title }} : {{ habit.description }}
         <button
-          class="c-button_dashboard"
+          class="dashboard__button"
           @click="deleteHabit(habit, 'personal')"
         >
           ✖️
@@ -81,27 +90,30 @@ function onHabitCreated() {
       </li>
     </ul>
 
-    <AddHabitForm @habit:created="onHabitCreated" />
+    <AddHabitForm />
   </div>
 </template>
 
 <style lang="scss">
-.c-h1__dashboard {
+.dashboard {
+  &__title {
     font-size: 2.5rem;
     font-weight: bold;
     margin-bottom: 1.5rem;
-    color: #333;
-}
+    color: brown;
+  }
 
-.c-h2__dashboard {
+  &__subtitle {
     font-size: 1.8rem;
-    color: #555;
-    margin: 1.5rem 0 1rem;
+    color: #ff5a26;
+    margin: 1.5rem 1rem 1rem;
     border-bottom: 2px solid #e0e0e0;
     padding-bottom: 0.5rem;
-}
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+      "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  }
 
-.c-li__dashboard {
+  &__list-element {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -109,16 +121,15 @@ function onHabitCreated() {
     background-color: #f9f9f9;
     border-radius: 8px;
     margin-bottom: 0.5rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     transition: background-color 0.3s ease;
-
     &:hover {
-        background-color: #f0f0f0;
+    background-color: #f0f0f0;
     }
-}
+  }
 
-.c-button__dashboard {
-    color: #FF4136;  // équivalent de text-red-500
+  &__button{
+    color: #ff4136; // équivalent de text-red-500
     background: none;
     border: none;
     cursor: pointer;
@@ -128,12 +139,13 @@ function onHabitCreated() {
     border-radius: 4px;
 
     &:hover {
-        color: #CC0000;  // équivalent de hover:text-red-700
-        transform: scale(1.1);
+      color: #cc0000; // équivalent de hover:text-red-700
+      transform: scale(1.1);
     }
 
     &:focus {
-        outline: 2px solid rgba(255,0,0,0.2);
+      outline: 2px solid rgba(255, 0, 0, 0.2);
     }
+  }
 }
 </style>
