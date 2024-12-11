@@ -4,27 +4,23 @@ defineProps<{
   text: string;
   stats: { value: string; text: string }[];
 }>();
-const { urlFor } = useSanityImage();
-
-const { data: Homepage } = await useSanityQuery<SanityDocument[]>(groq`
-  *[_type == "homepage"][0]`);
-console.log(Homepage);
+// const { urlFor } = useSanityImage();
 </script>
 
 <template>
   <section class="hero">
     <div class="hero__content">
-      <img class="hero__img" :src="urlFor(Homepage?.hero?.image)?.url()" alt="Hero Image">
+      <!-- <img class="hero__img" :src="urlFor(image)?.url()" alt="Hero Image"> -->
       <div class="hero__overlay">
-      <h1 class="hero__title">{{ Homepage?.hero.title }}</h1>
-      <p class="hero__text">{{ Homepage?.hero.text }}</p>
+      <h1 class="hero__title">{{ title }}</h1>
+      <p class="hero__text">{{ text }}</p>
       </div>
     </div>
   </section>
   <section>
     <div class="c-hero__stats">
       <div
-        v-for="(stat, index) in Homepage.hero.stats" :key="index" class="c-hero__stat">
+        v-for="(stat, index) in stats" :key="index" class="c-hero__stat">
         <StatCard v-bind="stat" />
       </div>
     </div>

@@ -1,5 +1,6 @@
 <script lang="ts" setup="">
-const { data: Homepage } = await useSanityQuery<SanityDocument[]>(groq`
+import type { SanityDocument } from '@sanity/client'
+const { data: Homepage } = await useSanityQuery<SanityDocument>(groq`
   *[_type == "homepage"][0]`);
 console.log(Homepage);
 
@@ -15,7 +16,7 @@ useSeoMeta({
 <template>
     <div>
       <div v-if="Homepage" class="p-homepage">
-        <Hero v-bind="{...Homepage.hero}" />
+        <Hero v-bind="{ title: Homepage.hero.title, text: Homepage.hero.text, stats: Homepage.hero.stats, image: Homepage.hero.image }" />
       </div>
     </div>
      

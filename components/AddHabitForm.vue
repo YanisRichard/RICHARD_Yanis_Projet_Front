@@ -1,9 +1,7 @@
 <script lang="ts" setup="">
 const title = ref("");
 const description = ref("");
-
-const emit = defineEmits(['habit:created'])
-
+const error = ref("")
 
 async function onSubmit(event: Event) {
   event.preventDefault();
@@ -14,9 +12,10 @@ async function onSubmit(event: Event) {
         body: { title: title.value, description: description.value}
     })
 
-    emit('habit:created')
+    $trigger('habit:created')
 
   } catch (err) {
+    console.log(err)
     error.value = "Mon message d'erreur";
   }
 }
